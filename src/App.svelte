@@ -18,6 +18,6 @@
   main {
     display: grid;
     width: 100vw;
-    grid-template-areas: "menu page page page page page";
+    
   }
 </style>
