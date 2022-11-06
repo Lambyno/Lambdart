@@ -98,11 +98,7 @@
   #menu-container-right {
     grid-column-start: 3;
   }
-
-  #menu-container-right > a {
-    font-size: larger;
-    color: black;
-  }
+  
   #menu-container-right > div > a > img {
     width: 30px;
     height: 30px;
