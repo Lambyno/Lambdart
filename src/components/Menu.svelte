@@ -1,5 +1,7 @@
 <script>
   import { page } from "./data.store";
+  import { checkMobile } from "./checkMobile.svelte";
+  import { fade } from 'svelte/transition';
 
   import * as Tupi from "../assets/Tupi_transzparens.png";
 
@@ -10,52 +12,159 @@
   import * as KoFi from "../assets/Icons_Colors_Font/Icons/ko-fi.svg";
   import * as BioLink from "../assets/Icons_Colors_Font/Icons/bio link.ico";
   import * as Mail from "../assets/Icons_Colors_Font/Icons/mail.svg";
+  import * as Menu from "../assets/Icons_Colors_Font/Icons/menu.svg";
+
+  let menuOpen = false;
 </script>
 
-<div id="menu-container">
-  <div id="menu-container-left">
-    <img src={Tupi.default} alt="TUPI" /> <br />
-    <span id="menu-title">Fazakas Ádám</span>
-  </div>
-  <div id="menu-container-middle">
+{#if menuOpen}
+  <div id="menu-container-mobile" in:fade={{duration: 80}} out:fade={{duration: 80}}>
     <span
       on:click={() => {
         page.set(0);
-      }}>Character Design &nbsp;&nbsp;</span
+        menuOpen = false;
+      }}>Character Design</span
     >
     <span
       on:click={() => {
         page.set(1);
-      }}>Illustrations &nbsp;&nbsp;</span
+        menuOpen = false;
+      }}>Illustrations</span
     >
     <span
       on:click={() => {
         page.set(2);
-      }}>Manga &nbsp;&nbsp;</span
+        menuOpen = false;
+      }}>Manga</span
     >
     <span
       on:click={() => {
         page.set(3);
+        menuOpen = false;
       }}>About Me</span
     >
-  </div>
-  <div id="menu-container-right">
+
     <div>
-      <a href="https://twitter.com/my_lambda"><img src={Twitter.default} alt="Twitter" /></a>
-      <a href="https://instagram.com/lambdart_"><img src={Instagram.default} alt="Instagram" /></a>
-      <a href="https://www.youtube.com/channel/UCd3vo47GFeIlOjrKQqtmeqQ/featured"><img src={YouTube.default} alt="YouTube" /></a>
-      <a href="https://ko-fi.com/mylambda52231"><img src={KoFi.default} alt="KoFi" /></a>
-      <a href="https://lambdart.bio.link/"
-        ><img src={BioLink.default} alt="BioLink" style="margin-right: 0;" /></a
+      <a href="https://twitter.com/my_lambda"
+        ><img src={Twitter.default} alt="Twitter" /></a
       >
-      <a href="mailto:adamfazakas@yahoo.com" style="margin-left: 10px;"
+      <a href="https://instagram.com/lambdart_"
+        ><img src={Instagram.default} alt="Instagram" /></a
+      >
+      <a
+        href="https://www.youtube.com/channel/UCd3vo47GFeIlOjrKQqtmeqQ/featured"
+        ><img src={YouTube.default} alt="YouTube" /></a
+      >
+      <a href="https://ko-fi.com/mylambda52231"
+        ><img src={KoFi.default} alt="KoFi" /></a
+      >
+      <a href="https://lambdart.bio.link/"
+        ><img
+          src={BioLink.default}
+          alt="BioLink"
+          style="margin-right: 0;"
+        /></a
+      >
+      <a href="mailto:adamfazakas@yahoo.com"
         ><img src={Mail.default} alt="Mail" /></a
       >
     </div>
   </div>
-</div>
+{/if}
+
+{#if checkMobile()}
+  <div id="menu-container" style="display: flex; justify-content: center; position:fixed;">
+    <div style="padding: 10px;">
+      <span id="menu-title" style="margin: 0;">Fazakas Ádám</span>
+    </div>
+    <img
+      src={Menu.default}
+      alt="menu"
+      style="width: 50px; height: 50px; margin-left: 10px;"
+      on:click={() => {
+        menuOpen = true;
+      }}
+    />
+  </div>
+{:else}
+  <div id="menu-container">
+    <div id="menu-container-left">
+      <img src={Tupi.default} alt="TUPI" /> <br />
+      <span id="menu-title">Fazakas Ádám</span>
+    </div>
+    <div id="menu-container-middle">
+      <span
+        on:click={() => {
+          page.set(0);
+        }}>Character Design &nbsp;&nbsp;</span
+      >
+      <span
+        on:click={() => {
+          page.set(1);
+        }}>Illustrations &nbsp;&nbsp;</span
+      >
+      <span
+        on:click={() => {
+          page.set(2);
+        }}>Manga &nbsp;&nbsp;</span
+      >
+      <span
+        on:click={() => {
+          page.set(3);
+        }}>About Me</span
+      >
+    </div>
+    <div id="menu-container-right">
+      <div>
+        <a href="https://twitter.com/my_lambda"
+          ><img src={Twitter.default} alt="Twitter" /></a
+        >
+        <a href="https://instagram.com/lambdart_"
+          ><img src={Instagram.default} alt="Instagram" /></a
+        >
+        <a
+          href="https://www.youtube.com/channel/UCd3vo47GFeIlOjrKQqtmeqQ/featured"
+          ><img src={YouTube.default} alt="YouTube" /></a
+        >
+        <a href="https://ko-fi.com/mylambda52231"
+          ><img src={KoFi.default} alt="KoFi" /></a
+        >
+        <a href="https://lambdart.bio.link/"
+          ><img
+            src={BioLink.default}
+            alt="BioLink"
+            style="margin-right: 0;"
+          /></a
+        >
+        <a href="mailto:adamfazakas@yahoo.com" style="margin-left: 10px;"
+          ><img src={Mail.default} alt="Mail" /></a
+        >
+      </div>
+    </div>
+  </div>
+{/if}
 
 <style>
+  #menu-container-mobile {
+    position: fixed;
+    z-index: 555;
+    background: white;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+  }
+
+  #menu-container-mobile > span {
+    font-size: xx-large;
+  }
+
+  #menu-container-mobile > div > a > img {
+    width: 50px;
+    height: 50px;
+  }
+
   #menu-container {
     display: grid;
     width: 100%;
@@ -98,7 +207,7 @@
   #menu-container-right {
     grid-column-start: 3;
   }
-  
+
   #menu-container-right > div > a > img {
     width: 30px;
     height: 30px;

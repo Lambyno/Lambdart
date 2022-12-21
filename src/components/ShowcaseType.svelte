@@ -1,5 +1,6 @@
 <script>
   import { page } from "./data.store";
+  import { checkMobile } from "./checkMobile.svelte";
 
   import * as ParallaxImage from "../assets/Artworks/Illustrations/Parallax.png";
 
@@ -78,27 +79,63 @@
   });
 </script>
 
-<div id="showcasetype-container">
+<div id="showcasetype-container" style={checkMobile()? "margin-top: 50px;" : ""}>
   {#if currentPage === 0}
-    <div id="parallax" style={`background-image: url(${ParallaxImage.default})`} />
+    {#if !checkMobile()}
+      <div
+        id="parallax"
+        style={`background-image: url(${ParallaxImage.default})`}
+      />
+    {/if}
+
     {#each characterDesign as item}
-      <img src={item.default} alt="art" />
+      <img
+        src={item.default}
+        alt="art"
+        style={checkMobile()
+          ? "max-width: 100vw; max-height: fit-content;"
+          : ""}
+      />
     {/each}
   {:else if currentPage === 1}
-    <div id="parallax" style={`background-image: url(${ParallaxImage.default})`} />
+    {#if !checkMobile()}
+      <div
+        id="parallax"
+        style={`background-image: url(${ParallaxImage.default})`}
+      />
+    {/if}
+
     {#each illustrations as item}
-      <img src={item.default} alt="art" />
+      <img
+        src={item.default}
+        alt="art"
+        style={checkMobile()
+          ? "max-width: 100vw; max-height: fit-content;"
+          : ""}
+      />
     {/each}
   {:else if currentPage === 2}
-    <div id="parallax" style={`background-image: url(${ParallaxImage.default})`} />
+    {#if !checkMobile()}
+      <div
+        id="parallax"
+        style={`background-image: url(${ParallaxImage.default})`}
+      />
+    {/if}
+
     {#each manga as item}
-      <img src={item.default} alt="art" />
+      <img
+        src={item.default}
+        alt="art"
+        style={checkMobile()
+          ? "max-width: 100vw; max-height: fit-content;"
+          : ""}
+      />
     {/each}
   {:else if currentPage === 3}
     <div
       style="display: grid; justify-items: center; align-items: center; height: 100%; width: 100%; margin-top: 50px;"
     >
-      <div style="width: 800px; font-size: x-large;">
+      <div style={checkMobile() ? "" : "width: 800px; font-size: x-large;"}>
         <span>Heyho!</span>
         <br /><br />
         <span
