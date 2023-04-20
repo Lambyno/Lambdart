@@ -1,7 +1,7 @@
 <script>
   import { page } from "./data.store";
   import { checkMobile } from "./checkMobile.svelte";
-  import { fade } from 'svelte/transition';
+  import { fade } from "svelte/transition";
 
   import * as Tupi from "../assets/Tupi_transzparens.png";
 
@@ -18,7 +18,11 @@
 </script>
 
 {#if menuOpen}
-  <div id="menu-container-mobile" in:fade={{duration: 80}} out:fade={{duration: 80}}>
+  <div
+    id="menu-container-mobile"
+    in:fade={{ duration: 80 }}
+    out:fade={{ duration: 80 }}
+  >
     <span
       on:click={() => {
         page.set(0);
@@ -44,7 +48,7 @@
       }}>About Me</span
     >
 
-    <div>
+    <!--<div>
       <a href="https://twitter.com/my_lambda"
         ><img src={Twitter.default} alt="Twitter" /></a
       >
@@ -59,23 +63,22 @@
         ><img src={KoFi.default} alt="KoFi" /></a
       >
       <a href="https://lambdart.bio.link/"
-        ><img
-          src={BioLink.default}
-          alt="BioLink"
-          style="margin-right: 0;"
-        /></a
+        ><img src={BioLink.default} alt="BioLink" style="margin-right: 0;" /></a
       >
       <a href="mailto:adamfazakas@yahoo.com"
         ><img src={Mail.default} alt="Mail" /></a
       >
-    </div>
+    </div>-->
   </div>
 {/if}
 
 {#if checkMobile()}
-  <div id="menu-container" style="display: flex; justify-content: center; position:fixed;">
+  <div
+    id="menu-container"
+    style="display: flex; justify-content: center; position:fixed;"
+  >
     <div style="padding: 10px;">
-      <span id="menu-title" style="margin: 0;">Fazakas Ádám</span>
+      <span id="menu-title" style="margin: 0;">FAZAKAS ÁDÁM</span>
     </div>
     <img
       src={Menu.default}
@@ -89,32 +92,31 @@
 {:else}
   <div id="menu-container">
     <div id="menu-container-left">
-      <img src={Tupi.default} alt="TUPI" /> <br />
-      <span id="menu-title">Fazakas Ádám</span>
+      <span id="menu-title">FAZAKAS ÁDÁM</span>
     </div>
     <div id="menu-container-middle">
       <span
         on:click={() => {
           page.set(0);
-        }}>Character Design &nbsp;&nbsp;</span
+        }}>concept art &nbsp;&nbsp;</span
       >
       <span
         on:click={() => {
           page.set(1);
-        }}>Illustrations &nbsp;&nbsp;</span
+        }}>illustration &nbsp;&nbsp;</span
       >
       <span
         on:click={() => {
           page.set(2);
-        }}>Manga &nbsp;&nbsp;</span
+        }}>manga &nbsp;&nbsp;</span
       >
       <span
         on:click={() => {
           page.set(3);
-        }}>About Me</span
+        }}>about me</span
       >
     </div>
-    <div id="menu-container-right">
+    <!--<div id="menu-container-right">
       <div>
         <a href="https://twitter.com/my_lambda"
           ><img src={Twitter.default} alt="Twitter" /></a
@@ -140,7 +142,7 @@
           ><img src={Mail.default} alt="Mail" /></a
         >
       </div>
-    </div>
+    </div>-->
   </div>
 {/if}
 
@@ -167,30 +169,28 @@
 
   #menu-container {
     display: grid;
-    width: 100%;
-    align-items: center;
-    grid-column-start: 0;
+    width: 80%;
+    height: 150px;
     background: white;
     color: black;
-    align-items: center;
+    box-sizing: border-box;
+    align-items: end;
     justify-items: center;
+    margin: 0 auto;
+    border-bottom: 1px solid black;
   }
   #menu-container-left {
     display: flex;
     justify-items: center;
     width: 100%;
-    padding-left: 50px;
     align-items: center;
-  }
-
-  #menu-container-left > img {
-    width: 70px;
-    height: 100px;
   }
 
   #menu-container-middle {
     display: flex;
     justify-items: center;
+    justify-content: end;
+    margin-right: 40px;
     grid-column-start: 2;
     width: 100%;
   }
@@ -198,7 +198,9 @@
     color: rgb(77, 77, 77);
     font-weight: bold;
     cursor: pointer;
-    font-size: x-large;
+    font-size: large;
+    letter-spacing: -1px;
+    margin-bottom: 20px;
   }
   #menu-container-middle > span:hover {
     color: black;
@@ -221,7 +223,13 @@
   #menu-title {
     font-size: xx-large;
     margin-left: 20px;
-    font-weight: bold;
+    font-weight: bolder;
+    margin-bottom: 30px;
+  }
+
+  span {
+    font-family: "Space Mono", monospace;
+    letter-spacing: -1px;
   }
 
   img {
