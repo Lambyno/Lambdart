@@ -15,6 +15,42 @@
   import * as Menu from "../assets/Icons_Colors_Font/Icons/menu.svg";
 
   let menuOpen = false;
+
+  let current_box = -1;
+
+  let box_left = 0;
+  let first_time_box_show = true;
+  let box_exit = true;
+
+  function mouseenter(e, index) {
+    let bounding_box = e.target.getBoundingClientRect();
+    current_box = index;
+    box_exit = false;
+    box_left = bounding_box.left;
+    console.log(index);
+  }
+
+  function boxmouseleave() {
+    let index = current_box;
+    setTimeout(() => {
+      if (current_box === index) {
+        current_box = -1;
+      }
+    }, 500);
+    box_exit = true;
+    first_time_box_show = false;
+  }
+
+  function menumouseleave(index) {
+    first_time_box_show = false;
+    setTimeout(() => {
+      if (current_box === index && box_exit) {
+        current_box = -1;
+      } else {
+        box_exit = true;
+      }
+    }, 100);
+  }
 </script>
 
 {#if menuOpen}
@@ -48,7 +84,7 @@
       }}>About Me</span
     >
 
-    <!--<div>
+    <div>
       <a href="https://twitter.com/my_lambda"
         ><img src={Twitter.default} alt="Twitter" /></a
       >
@@ -68,7 +104,7 @@
       <a href="mailto:adamfazakas@yahoo.com"
         ><img src={Mail.default} alt="Mail" /></a
       >
-    </div>-->
+    </div>
   </div>
 {/if}
 
@@ -83,7 +119,7 @@
     <img
       src={Menu.default}
       alt="menu"
-      style="width: 50px; height: 50px; margin-left: 10px;"
+      style="50px; height: 50px; margin-left: 10px;"
       on:click={() => {
         menuOpen = true;
       }}
@@ -96,25 +132,64 @@
     </div>
     <div id="menu-container-middle">
       <span
+        class="menu-box-buttons"
+        style={current_box === 0 ? "border-left: 1px solid black;" : ""}
         on:click={() => {
           page.set(0);
-        }}>concept art &nbsp;&nbsp;</span
+        }}
+        on:mouseenter={(e) => {
+          mouseenter(e, 0);
+        }}
+        on:mouseleave={() => {
+          menumouseleave(0);
+        }}>&nbsp; concept art &nbsp;</span
       >
       <span
+        class="menu-box-buttons"
+        style={current_box === 1 ? "border-left: 1px solid black;" : ""}
         on:click={() => {
           page.set(1);
-        }}>illustration &nbsp;&nbsp;</span
+        }}
+        on:mouseenter={(e) => {
+          mouseenter(e, 1);
+        }}
+        on:mouseleave={() => {
+          menumouseleave(1);
+        }}>&nbsp; illustration &nbsp;</span
       >
       <span
+        class="menu-box-buttons"
+        style={current_box === 2 ? "border-left: 1px solid black;" : ""}
         on:click={() => {
           page.set(2);
-        }}>manga &nbsp;&nbsp;</span
+        }}
+        on:mouseenter={(e) => {
+          mouseenter(e, 2);
+        }}
+        on:mouseleave={() => {
+          menumouseleave(2);
+        }}>&nbsp; manga &nbsp;</span
       >
       <span
         on:click={() => {
           page.set(3);
-        }}>about me</span
+        }}>&nbsp; about me</span
       >
+
+      <div
+        id="menu-box"
+        style={current_box >= 0
+          ? first_time_box_show
+            ? `left: ${box_left}px; transition: 0s; animation: fadein 1s ease;`
+            : `left: ${box_left}px;  animation: fadein 1s ease;`
+          : `left: ${box_left}px; visibility: hidden;`}
+        on:mouseleave={boxmouseleave}
+        on:mouseenter={() => {
+          box_exit = false;
+        }}
+      >
+        <span>haha</span>
+      </div>
     </div>
     <!--<div id="menu-container-right">
       <div>
@@ -158,15 +233,6 @@
     align-items: center;
   }
 
-  #menu-container-mobile > span {
-    font-size: xx-large;
-  }
-
-  #menu-container-mobile > div > a > img {
-    width: 50px;
-    height: 50px;
-  }
-
   #menu-container {
     display: grid;
     width: 80%;
@@ -206,18 +272,11 @@
     color: black;
   }
 
-  #menu-container-right {
-    grid-column-start: 3;
+  .menu-box-buttons {
+    border-left: 1px solid white;
   }
-
-  #menu-container-right > div > a > img {
-    width: 30px;
-    height: 30px;
-    margin-right: 15px;
-    opacity: 75%;
-  }
-  #menu-container-right > div > a > img:hover {
-    opacity: 100%;
+  .menu-box-buttons:hover {
+    border-left: 1px solid black;
   }
 
   #menu-title {
@@ -235,5 +294,29 @@
   img {
     width: 150px;
     height: 200px;
+  }
+
+  #menu-box {
+    transition: 0.2s ease;
+    width: 150px;
+    height: 300px;
+    position: absolute;
+    background: white;
+    grid-row-start: 2;
+    margin-top: 30px;
+    border-radius: 3px;
+    z-index: 9999;
+    box-shadow: 0 7px 10px rgb(0 0 0 / 30%);
+    -moz-box-shadow: 0 7px 10px rgb(0 0 0 / 30%);
+  }
+
+  @keyframes fadein {
+    0% {
+      visibility: visible;
+      opacity: 0%;
+    }
+    100% {
+      opacity: 100%;
+    }
   }
 </style>
