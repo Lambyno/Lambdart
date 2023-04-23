@@ -301,7 +301,7 @@
     width: 150px;
     height: 300px;
     position: absolute;
-    background: white;
+    background: #000000c9;
     grid-row-start: 2;
     margin-top: 30px;
     border-radius: 3px;
