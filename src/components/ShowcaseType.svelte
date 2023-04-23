@@ -79,7 +79,10 @@
   });
 </script>
 
-<div id="showcasetype-container" style={checkMobile()? "margin-top: 50px;" : ""}>
+<div
+  id="showcasetype-container"
+  style={checkMobile() ? "margin-top: 50px;" : ""}
+>
   {#if currentPage === 0}
     {#if !checkMobile()}
       <div
@@ -89,13 +92,18 @@
     {/if}
 
     {#each characterDesign as item}
-      <img
-        src={item.default}
-        alt="art"
-        style={checkMobile()
-          ? "max-width: 100vw; max-height: fit-content;"
-          : ""}
-      />
+      <div class="items">
+        <img
+          src={item.default}
+          alt="art"
+          style={checkMobile()
+            ? "max-width: 100vw; max-height: fit-content;"
+            : ""}
+        />
+        <div>
+          <span>hey</span>
+        </div>
+      </div>
     {/each}
   {:else if currentPage === 1}
     {#if !checkMobile()}
@@ -170,6 +178,24 @@
 </div>
 
 <style>
+  .items {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    color: white;
+  }
+  .items > div {
+    position: absolute;
+    display: none;
+  }
+  .items:hover > img {
+    filter: brightness(20%);
+    transition: 0.3s ease;
+  }
+  .items:hover > div {
+    display: unset;
+  }
+
   #showcasetype-container {
     padding: 10px;
     padding-top: 15px;

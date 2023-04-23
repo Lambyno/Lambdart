@@ -25,7 +25,6 @@
   function mouseenter(e, index) {
     let bounding_box = e.target.getBoundingClientRect();
     current_box = index;
-    box_exit = false;
     box_left = bounding_box.left;
     console.log(index);
   }
@@ -46,8 +45,6 @@
     setTimeout(() => {
       if (current_box === index && box_exit) {
         current_box = -1;
-      } else {
-        box_exit = true;
       }
     }, 100);
   }
