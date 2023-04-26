@@ -3,16 +3,16 @@
   import { checkMobile } from "./checkMobile.svelte";
   import { fade } from "svelte/transition";
 
-  import * as Tupi from "../assets/Tupi_transzparens.png";
+  import * as Tupi from "/Tupi_transzparens.png";
 
   // links
-  import * as Twitter from "../assets/Icons_Colors_Font/Icons/twitter.ico";
-  import * as Instagram from "../assets/Icons_Colors_Font/Icons/instagram.ico";
-  import * as YouTube from "../assets/Icons_Colors_Font/Icons/yotube.ico";
-  import * as KoFi from "../assets/Icons_Colors_Font/Icons/ko-fi.svg";
-  import * as BioLink from "../assets/Icons_Colors_Font/Icons/bio link.ico";
-  import * as Mail from "../assets/Icons_Colors_Font/Icons/mail.svg";
-  import * as Menu from "../assets/Icons_Colors_Font/Icons/menu.svg";
+  import * as Twitter from "/Icons_Colors_Font/Icons/twitter.ico";
+  import * as Instagram from "/Icons_Colors_Font/Icons/instagram.ico";
+  import * as YouTube from "/Icons_Colors_Font/Icons/yotube.ico";
+  import * as KoFi from "/Icons_Colors_Font/Icons/ko-fi.svg";
+  import * as BioLink from "/Icons_Colors_Font/Icons/bio link.ico";
+  import * as Mail from "/Icons_Colors_Font/Icons/mail.svg";
+  import * as Menu from "/Icons_Colors_Font/Icons/menu.svg";
 
   let menuOpen = false;
 
