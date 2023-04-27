@@ -1,5 +1,5 @@
 <script>
-  import { fade } from "svelte/transition";
+  import { crossfade } from "svelte/transition";
   import { page } from "./data.store";
   import { checkMobile } from "./checkMobile.svelte";
 
@@ -9,8 +9,11 @@
     Illustrations,
     Manga1,
     Manga1Compressed,
+    IllustrationsCompressed,
+    CharacterDesignCompressed,
   } from "./images";
 
+  const [send, receive] = crossfade({ duration: 250 });
   let currentPage = 0;
   let chosen_src = "";
   page.subscribe((val) => {
@@ -35,15 +38,19 @@
   id="showcasetype-container"
   style={checkMobile() ? "margin-top: 50px;" : ""}
 >
-  {#if !checkMobile()}
+  {#if !checkMobile() && currentPage != 3}
     <div id="parallax" style={`background-image: url(${ParallaxImage})`} />
   {/if}
   {#if currentPage === 0}
-    {#each CharacterDesign as item}
+    {#each CharacterDesignCompressed as item, n}
       <div
         class="items"
-        in:fade={{ duration: 500 }}
-        out:fade={{ duration: 250 }}
+        out:send={{ key: "a" }}
+        in:receive={{ key: "a" }}
+        on:click={() => {
+          chosen_src = CharacterDesign[n];
+          show_dialog = true;
+        }}
       >
         <img
           src={item}
@@ -58,8 +65,16 @@
       </div>
     {/each}
   {:else if currentPage === 1}
-    {#each Illustrations as item}
-      <div in:fade={{ duration: 500 }} out:fade={{ duration: 250 }}>
+    {#each IllustrationsCompressed as item, n}
+      <div
+        class="items"
+        out:send={{ key: "a" }}
+        in:receive={{ key: "a" }}
+        on:click={() => {
+          chosen_src = Illustrations[n];
+          show_dialog = true;
+        }}
+      >
         <img
           src={item}
           alt="art"
@@ -67,13 +82,17 @@
             ? "max-width: 100vw; max-height: fit-content;"
             : ""}
         />
+        <div>
+          <span>hey</span>
+        </div>
       </div>
     {/each}
   {:else if currentPage === 2}
     {#each Manga1Compressed as item, n}
       <div
-        in:fade={{ duration: 500 }}
-        out:fade={{ duration: 250 }}
+        class="items"
+        out:send={{ key: "a" }}
+        in:receive={{ key: "a" }}
         on:click={() => {
           chosen_src = Manga1[n];
           show_dialog = true;
@@ -86,39 +105,39 @@
             ? "max-width: 100vw; max-height: fit-content;"
             : ""}
         />
+        <div>
+          <span>hey</span>
+        </div>
       </div>
     {/each}
   {:else if currentPage === 3}
     <div
-      in:fade={{ duration: 500 }}
-      out:fade={{ duration: 250 }}
+      out:send={{ key: "a" }}
+      in:receive={{ key: "a" }}
       style="display: grid; justify-items: center; align-items: center; height: 100%; width: 100%; margin-top: 50px;"
     >
-      <div style={checkMobile() ? "" : "width: 800px; font-size: x-large;"}>
-        <span>Heyho!</span>
+      <div
+        style={checkMobile()
+          ? ""
+          : "width: 800px; font-size: x-large; display: grid; justify-items: center;"}
+      >
+        <img
+          src="/Tupi_transparent.png"
+          alt="icon"
+          style="width: 300px; height: 300px;"
+        />
         <br /><br />
         <span
-          >&nbsp;&nbsp;&nbsp;&nbsp;I'm an aspiring art student in a university
-          studying Graphics Art on a masters degree. I also have 4 years of
-          basic Visual Arts (sculpting, painting, printmaking, drawing etc.)
-          highschool degree with 2 years of graphics art/printmaking
-          specialization.
+          >As someone who naturally gravitates towards introspection, I have
+          always loved the process of creation. Pursuing this passion, I
+          dedicated myself to studying art and improving my skills as an
+          aspiring artist through art education. My artistic interests lie in
+          the realms of concept art, illustration, and manga. I strive to be
+          unique in my approach, blending my technical abilities with my
+          imagination to produce visually engaging concepts and images. I enjoy
+          experimenting and pushing my artistic boundaries to achieve new levels
+          of creativity.
         </span>
-        <br /><br />
-        <span>
-          &nbsp;&nbsp;&nbsp;&nbsp;My interests are Character Design, Digital
-          Illustration/Painting in the style of mixing anime/manga styles with
-          realism/semi-realism and making manga. I tend to be experimental at
-          times and I'm open to different art styles.
-        </span>
-        <br /><br />
-        <span
-          >&nbsp;&nbsp;&nbsp;&nbsp;Currently I'm trying to improve as much as I
-          can; build relationships, do commissions/freelance jobs and keep
-          adding to my portfolio to make it look as professional as I can.
-        </span>
-        <br /><br />
-        <span>Thank you for visiting my page, I appreciate it a lot! </span>
       </div>
     </div>
   {:else}

@@ -3,7 +3,7 @@
   import { checkMobile } from "./checkMobile.svelte";
   import { fade } from "svelte/transition";
 
-  import * as Tupi from "/Tupi_transzparens.png";
+  import * as Tupi from "/Tupi_transparent.png";
 
   // links
   import * as Twitter from "/Icons_Colors_Font/Icons/twitter.ico";

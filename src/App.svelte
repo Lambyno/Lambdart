@@ -1,5 +1,5 @@
 <script>
-  import * as favicon from "/Tupi_transzparens.png";
+  import * as favicon from "/Tupi_transparent.png";
   // Components
   import Menu from "./components/Menu.svelte";
   import ShowcaseType from "./components/ShowcaseType.svelte";
