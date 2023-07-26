@@ -1,5 +1,5 @@
 <script>
-  import { crossfade } from "svelte/transition";
+  import { fly } from "svelte/transition";
   import { page } from "./data.store";
   import { checkMobile } from "./checkMobile.svelte";
 
@@ -13,7 +13,6 @@
     CharacterDesignCompressed,
   } from "./images";
 
-  const [send, receive] = crossfade({ duration: 250 });
   let currentPage = 0;
   let chosen_src = "";
   page.subscribe((val) => {
@@ -42,78 +41,84 @@
     <div id="parallax" style={`background-image: url(${ParallaxImage})`} />
   {/if}
   {#if currentPage === 0}
-    {#each CharacterDesignCompressed as item, n}
-      <div
-        class="items"
-        out:send={{ key: "a" }}
-        in:receive={{ key: "a" }}
-        on:click={() => {
-          chosen_src = CharacterDesign[n];
-          show_dialog = true;
-        }}
-      >
-        <img
-          src={item}
-          alt="art"
-          style={checkMobile()
-            ? "max-width: 100vw; max-height: fit-content;"
-            : ""}
-        />
-        <div>
-          <span>hey</span>
+    <div id="photo">
+      {#each CharacterDesignCompressed as item, n}
+        <div
+          class="items"
+          in:fly={{ y: -50, duration: 250, delay: 300 }}
+          out:fly={{ y: -50, duration: 250 }}
+          on:click={() => {
+            chosen_src = CharacterDesign[n];
+            show_dialog = true;
+          }}
+        >
+          <img
+            src={item}
+            alt="art"
+            style={checkMobile()
+              ? "max-width: 100vw; max-height: fit-content;"
+              : ""}
+          />
+          <div>
+            <span>hey</span>
+          </div>
         </div>
-      </div>
-    {/each}
+      {/each}
+    </div>
   {:else if currentPage === 1}
-    {#each IllustrationsCompressed as item, n}
-      <div
-        class="items"
-        out:send={{ key: "a" }}
-        in:receive={{ key: "a" }}
-        on:click={() => {
-          chosen_src = Illustrations[n];
-          show_dialog = true;
-        }}
-      >
-        <img
-          src={item}
-          alt="art"
-          style={checkMobile()
-            ? "max-width: 100vw; max-height: fit-content;"
-            : ""}
-        />
-        <div>
-          <span>hey</span>
+    <div id="photo">
+      {#each IllustrationsCompressed as item, n}
+        <div
+          class="items"
+          in:fly={{ y: -50, duration: 250, delay: 300 }}
+          out:fly={{ y: -50, duration: 250 }}
+          on:click={() => {
+            chosen_src = Illustrations[n];
+            show_dialog = true;
+          }}
+        >
+          <img
+            src={item}
+            alt="art"
+            style={checkMobile()
+              ? "max-width: 100vw; max-height: fit-content;"
+              : ""}
+          />
+          <div>
+            <span>hey</span>
+          </div>
         </div>
-      </div>
-    {/each}
+      {/each}
+    </div>
   {:else if currentPage === 2}
-    {#each Manga1Compressed as item, n}
-      <div
-        class="items"
-        out:send={{ key: "a" }}
-        in:receive={{ key: "a" }}
-        on:click={() => {
-          chosen_src = Manga1[n];
-          show_dialog = true;
-        }}
-      >
-        <img
-          src={item}
-          alt="art"
-          style={checkMobile()
-            ? "max-width: 100vw; max-height: fit-content;"
-            : ""}
-        />
-        <div>
-          <span>hey</span>
+    <div id="photo">
+      {#each Manga1Compressed as item, n}
+        <div
+          class="items"
+          in:fly={{ y: -50, duration: 250, delay: 300 }}
+          out:fly={{ y: -50, duration: 250 }}
+          on:click={() => {
+            chosen_src = Manga1[n];
+            show_dialog = true;
+          }}
+        >
+          <img
+            src={item}
+            alt="art"
+            style={checkMobile()
+              ? "max-width: 100vw; max-height: fit-content;"
+              : ""}
+          />
+          <div>
+            <span>hey</span>
+          </div>
         </div>
-      </div>
-    {/each}
+      {/each}
+    </div>
   {:else if currentPage === 3}
     <div
-      out:send={{ key: "a" }}
-      in:receive={{ key: "a" }}
+      in:fly={{ y: -50, duration: 250, delay: 300 }}
+      out:fly={{ y: -50, duration: 250 }}
       style="display: grid; justify-items: center; align-items: center; height: 100%; width: 100%; margin-top: 50px;"
     >
       <div
@@ -169,9 +174,20 @@
   #showcasetype-container {
     padding: 10px;
     padding-top: 15px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+    line-height: 0;
+  }
+  #photo {
+    -webkit-column-count: 5;
+    -webkit-column-gap: 0px;
+    -moz-column-count: 5;
+    -moz-column-gap: 0px;
+    column-count: 5;
+    column-gap: 0px;
+  }
+
+  #photo img {
+    width: 100% !important;
+    height: auto !important;
   }
 
   img {
@@ -209,5 +225,34 @@
     max-width: 80vw;
     max-height: 80vh;
     object-fit: contain;
+  }
+
+  @media (max-width: 1200px) {
+    #photo {
+      -moz-column-count: 4;
+      -webkit-column-count: 4;
+      column-count: 4;
+    }
+  }
+  @media (max-width: 1000px) {
+    #photo {
+      -moz-column-count: 3;
+      -webkit-column-count: 3;
+      column-count: 3;
+    }
+  }
+  @media (max-width: 800px) {
+    #photo {
+      -moz-column-count: 2;
+      -webkit-column-count: 2;
+      column-count: 2;
+    }
+  }
+  @media (max-width: 400px) {
+    #photo {
+      -moz-column-count: 1;
+      -webkit-column-count: 1;
+      column-count: 1;
+    }
   }
 </style>
