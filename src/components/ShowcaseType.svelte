@@ -48,19 +48,19 @@
           in:fly={{ y: -50, duration: 250, delay: 300 }}
           out:fly={{ y: -50, duration: 250 }}
           on:click={() => {
-            chosen_src = CharacterDesign[n];
+            chosen_src = CharacterDesign[n].url;
             show_dialog = true;
           }}
         >
           <img
-            src={item}
+            src={item.url}
             alt="art"
             style={checkMobile()
               ? "max-width: 100vw; max-height: fit-content;"
               : ""}
           />
           <div>
-            <span>hey</span>
+            <span>{item.name}</span>
           </div>
         </div>
       {/each}
@@ -73,19 +73,19 @@
           in:fly={{ y: -50, duration: 250, delay: 300 }}
           out:fly={{ y: -50, duration: 250 }}
           on:click={() => {
-            chosen_src = Illustrations[n];
+            chosen_src = Illustrations[n].url;
             show_dialog = true;
           }}
         >
           <img
-            src={item}
+            src={item.url}
             alt="art"
             style={checkMobile()
               ? "max-width: 100vw; max-height: fit-content;"
               : ""}
           />
           <div>
-            <span>hey</span>
+            <span>{item.name}</span>
           </div>
         </div>
       {/each}
@@ -98,19 +98,19 @@
           in:fly={{ y: -50, duration: 250, delay: 300 }}
           out:fly={{ y: -50, duration: 250 }}
           on:click={() => {
-            chosen_src = Manga1[n];
+            chosen_src = Manga1[n].url;
             show_dialog = true;
           }}
         >
           <img
-            src={item}
+            src={item.url}
             alt="art"
             style={checkMobile()
               ? "max-width: 100vw; max-height: fit-content;"
               : ""}
           />
           <div>
-            <span>hey</span>
+            <span>{item.name}</span>
           </div>
         </div>
       {/each}
@@ -119,35 +119,53 @@
     <div
       in:fly={{ y: -50, duration: 250, delay: 300 }}
       out:fly={{ y: -50, duration: 250 }}
-      style="display: grid; justify-items: center; align-items: center; height: 100%; width: 100%; margin-top: 50px;"
+      style="display: grid; justify-items: center; align-items: center; height: 100%; width: 100%; margin-top: 50px; line-height: 1; color: white;"
     >
       <div
         style={checkMobile()
           ? ""
-          : "width: 800px; font-size: x-large; display: grid; justify-items: center;"}
+          : "width: 1000px; font-size: x-large; display: grid; justify-items: center;"}
       >
         <img
           src="/Tupi_transparent.png"
           alt="icon"
-          style="width: 300px; height: 300px;"
+          style="width: 200px; height: 200px;"
         />
-        <br /><br />
+        <br />
         <span
-          >As someone who naturally gravitates towards introspection, I have
-          always loved the process of creation. Pursuing this passion, I
-          dedicated myself to studying art and improving my skills as an
-          aspiring artist through art education. My artistic interests lie in
-          the realms of concept art, illustration, and manga. I strive to be
-          unique in my approach, blending my technical abilities with my
-          imagination to produce visually engaging concepts and images. I enjoy
-          experimenting and pushing my artistic boundaries to achieve new levels
-          of creativity.
-        </span>
+          style="background: black; width: 100%; padding: 20px; text-align: center; box-sizing: border-box; font-family: 'Barlow', sans-serif; font-size: x-large;"
+          >HELLO, I AM FAZAKAS ÁDÁM!'</span
+        >
+        <p
+          style="text-align: justify; width: 100%; font-family: 'Lekton', sans-serif; text-align-last: center;"
+        >
+          Driven by a deep passion for artistic expression, I decided to pursue
+          art education. My focus lies primarily in concept art and
+          illustration, where I aim to bring my own unique touch by blending my
+          technical skills with my imagination to make really captivating and
+          eye-catching concepts and images. I consistently challenge myself
+          through experimentation, seeking to enhance my creative abilities and
+          push the boundaries of my artistic endeavors.
+        </p>
+
+        <div id="about-me-buttons">
+          <a href="#">CONTACT</a>
+          <a href="#">CV</a>
+        </div>
+
+        <br />
+
+        <span
+          >Thank you <a
+            href="https://github.com/ElhamAryanpur"
+            style="text-decoration: none; color: white;"><u>Elham</u></a
+          >!</span
+        >
       </div>
     </div>
   {:else}
     {#each Illustrations as item}
-      <img src={item} alt="art" />
+      <img src={item.url} alt="art" />
     {/each}
   {/if}
 </div>
@@ -225,6 +243,29 @@
     max-width: 80vw;
     max-height: 80vh;
     object-fit: contain;
+  }
+
+  #about-me-buttons {
+    display: flex;
+  }
+  #about-me-buttons a {
+    text-decoration: none;
+    background: white;
+    color: black;
+    padding: 30px;
+    box-sizing: border-box;
+    margin: 10px;
+    width: 200px;
+    text-align: center;
+    font-size: x-large;
+    font-family: "Barlow", sans-serif;
+    border: 5px solid white;
+    transition: 0.25s;
+  }
+  #about-me-buttons a:hover {
+    background: transparent;
+    color: white;
+    transition: 0.25s;
   }
 
   @media (max-width: 1200px) {

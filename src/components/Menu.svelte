@@ -168,7 +168,6 @@
     align-items: end;
     justify-items: center;
     margin: 0 auto;
-    border-bottom: 1px solid black;
   }
   #menu-container-left {
     display: flex;
