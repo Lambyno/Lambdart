@@ -6,8 +6,10 @@
   import * as Tupi from "/Tupi_transparent.png";
 
   // links
-  import * as Twitter from "/Icons_Colors_Font/Icons/twitter.ico";
-  import * as Instagram from "/Icons_Colors_Font/Icons/instagram.ico";
+  import * as Artstation from "/Icons_Colors_Font/Icons/artstation_icon.svg";
+  import * as Behance from "/Icons_Colors_Font/Icons/be_behance_design_community_portfolio_behance_logo_icon.svg";
+  import * as Twitter from "/Icons_Colors_Font/Icons/twitter_bird_icon.svg";
+  import * as Instagram from "/Icons_Colors_Font/Icons/instagram_icon.svg";
   import * as YouTube from "/Icons_Colors_Font/Icons/yotube.ico";
   import * as KoFi from "/Icons_Colors_Font/Icons/ko-fi.svg";
   import * as BioLink from "/Icons_Colors_Font/Icons/bio link.ico";
@@ -90,27 +92,57 @@
     </div>
   {:else}
     <div id="menu-container">
-      <div id="menu-container-left">
-        <span id="menu-title">FAZAKAS ÁDÁM</span>
+      <div style="align-items: end;">
+        <div id="menu-container-left">
+          <span id="menu-title">FAZAKAS ÁDÁM</span>
+        </div>
+        <div id="menu-container-links">
+          <div>
+            <a href="https://lambino.artstation.com/"
+              ><img src={Artstation.default} alt="Artstation" /></a
+            >
+            <a href="https://www.behance.net/dmfazakas1"
+              ><img src={Behance.default} alt="Behance" /></a
+            >
+            <a href="https://instagram.com/lambdart_"
+              ><img src={Instagram.default} alt="Instagram" /></a
+            >
+            <a href="https://twitter.com/my_lambda"
+              ><img src={Twitter.default} alt="Twitter" /></a
+            >
+          </div>
+        </div>
       </div>
-      <div id="menu-container-middle">
-        <span
-          class="menu-box-buttons"
-          on:click={() => {
-            page.set(0);
-          }}>&nbsp; character design&nbsp;</span
+      <div style="align-items: center;">
+        <div>
+          <span
+            style="font-family: 'Lekton', sans-serif; font-size: x-large; transform: scale(1, 1.5);"
+          >
+            Concept artist
+          </span>
+        </div>
+        <div
+          id="menu-container-middle"
+          style="font-family: 'Lekton', sans-serif; "
         >
-        <span
-          class="menu-box-buttons"
-          on:click={() => {
-            page.set(1);
-          }}>&nbsp; illustration &nbsp;</span
-        >
-        <span
-          on:click={() => {
-            page.set(3);
-          }}>&nbsp; about me</span
-        >
+          <span
+            class="menu-box-buttons"
+            on:click={() => {
+              page.set(0);
+            }}>&nbsp; character design&nbsp;</span
+          >
+          <span
+            class="menu-box-buttons"
+            on:click={() => {
+              page.set(1);
+            }}>&nbsp; illustration &nbsp;</span
+          >
+          <span
+            on:click={() => {
+              page.set(3);
+            }}>&nbsp; about me</span
+          >
+        </div>
       </div>
       <!--<div id="menu-container-right">
       <div>
@@ -169,6 +201,12 @@
     justify-items: center;
     margin: 0 auto;
   }
+  #menu-container > div {
+    display: grid;
+    width: 100%;
+    height: 100%;
+  }
+
   #menu-container-left {
     display: flex;
     justify-items: center;
@@ -200,10 +238,36 @@
 
   #menu-title {
     font-size: xx-large;
-    margin-left: 20px;
     font-weight: bolder;
-    margin-bottom: 30px;
     color: #6e99ff;
+    font-family: "Barlow", sans-serif;
+    transform: scale(1, 1.5);
+  }
+
+  #menu-container-links {
+    grid-column-start: 2;
+    display: flex;
+    justify-content: right;
+  }
+  #menu-container-links > div {
+    display: flex;
+    gap: 15px;
+    transition: 0.25s;
+  }
+  #menu-container-links > div > a > img {
+    filter: invert();
+    width: 30px;
+    height: 30px;
+    transition: 0.25s;
+  }
+
+  #menu-container-links > div:hover > a > img {
+    filter: invert(80%);
+    transition: 0.25s;
+  }
+  #menu-container-links > div:hover > a > img:hover {
+    filter: invert(100%);
+    transition: 0.25s;
   }
 
   span {
