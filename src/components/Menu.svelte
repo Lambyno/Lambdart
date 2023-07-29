@@ -129,18 +129,18 @@
             class="menu-box-buttons"
             on:click={() => {
               page.set(0);
-            }}>&nbsp; character design&nbsp;</span
+            }}>character design</span
           >
           <span
             class="menu-box-buttons"
             on:click={() => {
               page.set(1);
-            }}>&nbsp; illustration &nbsp;</span
+            }}>illustration</span
           >
           <span
             on:click={() => {
               page.set(3);
-            }}>&nbsp; about me</span
+            }}>about me</span
           >
         </div>
       </div>
@@ -221,6 +221,7 @@
     margin-right: 40px;
     grid-column-start: 2;
     width: 100%;
+    gap: 20px;
   }
   #menu-container-middle > span {
     color: white;

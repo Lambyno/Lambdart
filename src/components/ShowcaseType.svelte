@@ -15,6 +15,8 @@
 
   let currentPage = 0;
   let chosen_src = "";
+  let chosen_source = Illustrations;
+  let chosen_index = 0;
   page.subscribe((val) => {
     currentPage = val;
   });
@@ -23,12 +25,34 @@
 </script>
 
 {#if show_dialog}
-  <div
-    id="dialog"
-    on:click={() => {
-      show_dialog = false;
-    }}
-  >
+  <div id="dialog">
+    <div
+      id="dialog-background"
+      on:click={() => {
+        show_dialog = false;
+      }}
+    />
+    <div
+      class="dialog-navigation"
+      style="left: calc(100vw - 100px); top: calc(50vh - 100px);"
+      on:click={() => {
+        chosen_src = chosen_source[chosen_index + 1].url;
+        chosen_index += 1;
+      }}
+    >
+      <span> {">"} </span>
+    </div>
+
+    <div
+      class="dialog-navigation"
+      style="left: 50px; top: calc(50vh - 100px);"
+      on:click={() => {
+        chosen_src = chosen_source[chosen_index - 1].url;
+        chosen_index -= 1;
+      }}
+    >
+      <span> {"<"} </span>
+    </div>
     <img src={chosen_src} alt={chosen_src} />
   </div>
 {/if}
@@ -49,6 +73,8 @@
           out:fly={{ y: -50, duration: 250 }}
           on:click={() => {
             chosen_src = CharacterDesign[n].url;
+            chosen_source = CharacterDesign;
+            chosen_index = n;
             show_dialog = true;
           }}
         >
@@ -74,6 +100,8 @@
           out:fly={{ y: -50, duration: 250 }}
           on:click={() => {
             chosen_src = Illustrations[n].url;
+            chosen_source = Illustrations;
+            chosen_index = n;
             show_dialog = true;
           }}
         >
@@ -99,6 +127,8 @@
           out:fly={{ y: -50, duration: 250 }}
           on:click={() => {
             chosen_src = Manga1[n].url;
+            chosen_source = Manga1;
+            chosen_index = n;
             show_dialog = true;
           }}
         >
@@ -134,7 +164,7 @@
         <br />
         <span
           style="background: black; width: 100%; padding: 20px; text-align: center; box-sizing: border-box; font-family: 'Barlow', sans-serif; font-size: x-large;"
-          >HELLO, I AM FAZAKAS ÁDÁM!'</span
+          >HELLO, I AM FAZAKAS ÁDÁM!</span
         >
         <p
           style="text-align: justify; width: 100%; font-family: 'Lekton', sans-serif; text-align-last: center;"
@@ -236,13 +266,42 @@
     display: grid;
     align-items: center;
     justify-items: center;
-    background: rgba(0, 0, 0, 0.93);
   }
-
   #dialog > img {
     max-width: 80vw;
     max-height: 80vh;
     object-fit: contain;
+  }
+  #dialog-background {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    background: rgba(0, 0, 0, 0.93);
+    z-index: -1;
+  }
+  .dialog-navigation {
+    color: white;
+    font-size: xxx-large;
+    position: fixed;
+    height: 100px;
+    width: 50px;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    border-radius: 10px;
+    transition: 0.25s;
+    z-index: 9999;
+    user-select: none;
+    --webkit-user-select: none;
+  }
+  .dialog-navigation:hover {
+    cursor: pointer;
+    background: rgba(56, 56, 56, 0.521);
+    transition: 0.25s;
   }
 
   #about-me-buttons {
