@@ -11,15 +11,34 @@
     Manga1Compressed,
     IllustrationsCompressed,
     CharacterDesignCompressed,
+    Manga2Compressed,
+    Manga2,
+    Manga3,
+    Manga3Compressed,
   } from "./images";
 
-  let currentPage = 0;
+  let currentPage = 4;
   let chosen_src = "";
   let chosen_source = Illustrations;
   let chosen_index = 0;
   page.subscribe((val) => {
     currentPage = val;
   });
+
+  let AllArt = [
+    ...Illustrations,
+    ...CharacterDesign,
+    ...Manga1,
+    ...Manga2,
+    ...Manga3,
+  ];
+  let AllArtCompressed = [
+    ...IllustrationsCompressed,
+    ...CharacterDesignCompressed,
+    ...Manga1Compressed,
+    ...Manga2Compressed,
+    ...Manga3Compressed,
+  ];
 
   let show_dialog = false;
 </script>
@@ -193,10 +212,33 @@
         >
       </div>
     </div>
-  {:else}
-    {#each Illustrations as item}
-      <img src={item.url} alt="art" />
-    {/each}
+  {:else if currentPage === 4}
+    <div id="photo">
+      {#each AllArtCompressed as item, n}
+        <div
+          class="items"
+          in:fly={{ y: -50, duration: 250, delay: 300 }}
+          out:fly={{ y: -50, duration: 250 }}
+          on:click={() => {
+            chosen_src = AllArt[n].url;
+            chosen_source = AllArt;
+            chosen_index = n;
+            show_dialog = true;
+          }}
+        >
+          <img
+            src={item.url}
+            alt="art"
+            style={checkMobile()
+              ? "max-width: 100vw; max-height: fit-content;"
+              : ""}
+          />
+          <div>
+            <span>{item.name}</span>
+          </div>
+        </div>
+      {/each}
+    </div>
   {/if}
 </div>
 
@@ -206,6 +248,8 @@
     align-items: center;
     justify-items: center;
     color: white;
+
+    margin: 10px;
   }
   .items > div {
     position: absolute;
@@ -223,6 +267,8 @@
     padding: 10px;
     padding-top: 15px;
     line-height: 0;
+    box-sizing: border-box;
+    background: #323c44;
   }
   #photo {
     -webkit-column-count: 5;
@@ -231,6 +277,8 @@
     -moz-column-gap: 0px;
     column-count: 5;
     column-gap: 0px;
+    width: fit-content;
+    padding-top: 10px;
   }
 
   #photo img {

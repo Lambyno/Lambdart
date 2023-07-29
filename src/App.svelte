@@ -17,6 +17,5 @@
 <style>
   main {
     display: grid;
-    width: 100vw;
   }
 </style>

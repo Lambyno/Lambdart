@@ -94,7 +94,13 @@
     <div id="menu-container">
       <div style="align-items: end;">
         <div id="menu-container-left">
-          <span id="menu-title">FAZAKAS ÁDÁM</span>
+          <span
+            id="menu-title"
+            on:click={() => {
+              page.set(4);
+              menuOpen = false;
+            }}>FAZAKAS ÁDÁM</span
+          >
         </div>
         <div id="menu-container-links">
           <div>
