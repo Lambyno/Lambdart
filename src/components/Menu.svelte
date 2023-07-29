@@ -3,13 +3,7 @@
   import { checkMobile } from "./checkMobile.svelte";
   import { fade } from "svelte/transition";
 
-  import * as Tupi from "/Tupi_transparent.png";
-
   // links
-  import * as Artstation from "/Icons_Colors_Font/Icons/artstation_icon.svg";
-  import * as Behance from "/Icons_Colors_Font/Icons/be_behance_design_community_portfolio_behance_logo_icon.svg";
-  import * as Twitter from "/Icons_Colors_Font/Icons/twitter_bird_icon.svg";
-  import * as Instagram from "/Icons_Colors_Font/Icons/instagram_icon.svg";
   import * as YouTube from "/Icons_Colors_Font/Icons/yotube.ico";
   import * as KoFi from "/Icons_Colors_Font/Icons/ko-fi.svg";
   import * as BioLink from "/Icons_Colors_Font/Icons/bio link.ico";
@@ -47,10 +41,16 @@
 
       <div>
         <a href="https://twitter.com/my_lambda"
-          ><img src={Twitter.default} alt="Twitter" /></a
+          ><img
+            src="/Icons_Colors_Font/Icons/twitter_bird_icon.svg"
+            alt="Twitter"
+          /></a
         >
         <a href="https://instagram.com/lambdart_"
-          ><img src={Instagram.default} alt="Instagram" /></a
+          ><img
+            src="/Icons_Colors_Font/Icons/instagram_icon.svg"
+            alt="Instagram"
+          /></a
         >
         <a
           href="https://www.youtube.com/channel/UCd3vo47GFeIlOjrKQqtmeqQ/featured"
@@ -105,16 +105,28 @@
         <div id="menu-container-links">
           <div>
             <a href="https://lambino.artstation.com/"
-              ><img src={Artstation.default} alt="Artstation" /></a
+              ><img
+                src="/Icons_Colors_Font/Icons/artstation_icon.svg"
+                alt="Artstation"
+              /></a
             >
             <a href="https://www.behance.net/dmfazakas1"
-              ><img src={Behance.default} alt="Behance" /></a
+              ><img
+                src="/Icons_Colors_Font/Icons/be_behance_design_community_portfolio_behance_logo_icon.svg"
+                alt="Behance"
+              /></a
             >
             <a href="https://instagram.com/lambdart_"
-              ><img src={Instagram.default} alt="Instagram" /></a
+              ><img
+                src="/Icons_Colors_Font/Icons/instagram_icon.svg"
+                alt="Instagram"
+              /></a
             >
             <a href="https://twitter.com/my_lambda"
-              ><img src={Twitter.default} alt="Twitter" /></a
+              ><img
+                src="/Icons_Colors_Font/Icons/twitter_bird_icon.svg"
+                alt="Twitter"
+              /></a
             >
           </div>
         </div>
@@ -249,6 +261,7 @@
     color: #6e99ff;
     font-family: "Barlow", sans-serif;
     transform: scale(1, 1.5);
+    cursor: pointer;
   }
 
   #menu-container-links {
