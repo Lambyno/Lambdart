@@ -20,18 +20,21 @@
       in:fade={{ duration: 80 }}
       out:fade={{ duration: 80 }}
     >
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
       <span
         on:click={() => {
           page.set(0);
           menuOpen = false;
         }}>Character Design</span
       >
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
       <span
         on:click={() => {
           page.set(1);
           menuOpen = false;
         }}>Illustrations</span
       >
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
       <span
         on:click={() => {
           page.set(3);
@@ -81,6 +84,7 @@
       <div style="padding: 10px;">
         <span id="menu-title" style="margin: 0;">FAZAKAS ÁDÁM</span>
       </div>
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
       <img
         src={Menu.default}
         alt="menu"
@@ -94,6 +98,7 @@
     <div id="menu-container">
       <div style="align-items: end;">
         <div id="menu-container-left">
+          <!-- svelte-ignore a11y-click-events-have-key-events -->
           <span
             id="menu-title"
             on:click={() => {
@@ -143,18 +148,21 @@
           id="menu-container-middle"
           style="font-family: 'Lekton', sans-serif; "
         >
+          <!-- svelte-ignore a11y-click-events-have-key-events -->
           <span
             class="menu-box-buttons"
             on:click={() => {
               page.set(0);
             }}>character design</span
           >
+          <!-- svelte-ignore a11y-click-events-have-key-events -->
           <span
             class="menu-box-buttons"
             on:click={() => {
               page.set(1);
             }}>illustration</span
           >
+          <!-- svelte-ignore a11y-click-events-have-key-events -->
           <span
             on:click={() => {
               page.set(3);

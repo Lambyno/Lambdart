@@ -2,7 +2,6 @@
   import { fly } from "svelte/transition";
   import { page } from "./data.store";
   import { checkMobile } from "./checkMobile.svelte";
-
   import {
     ParallaxImage,
     CharacterDesign,
@@ -16,6 +15,7 @@
     Manga3,
     Manga3Compressed,
   } from "./images";
+  import { onMount } from "svelte";
 
   let currentPage = 4;
   let chosen_src = "";
@@ -41,16 +41,25 @@
   ];
 
   let show_dialog = false;
+
+  let columns = 10;
+  onMount(() => {
+    window.addEventListener("resize", () => {
+      columns = Math.round(window.innerWidth / 200);
+    });
+  });
 </script>
 
 {#if show_dialog}
   <div id="dialog">
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div
       id="dialog-background"
       on:click={() => {
         show_dialog = false;
       }}
     />
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div
       class="dialog-navigation"
       style="left: calc(100vw - 100px); top: calc(50vh - 100px);"
@@ -62,6 +71,7 @@
       <span> {">"} </span>
     </div>
 
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
     <div
       class="dialog-navigation"
       style="left: 50px; top: calc(50vh - 100px);"
@@ -86,6 +96,7 @@
   {#if currentPage === 0}
     <div id="photo">
       {#each CharacterDesignCompressed as item, n}
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
         <div
           class="items"
           in:fly={{ y: -50, duration: 250, delay: 300 }}
@@ -113,6 +124,7 @@
   {:else if currentPage === 1}
     <div id="photo">
       {#each IllustrationsCompressed as item, n}
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
         <div
           class="items"
           in:fly={{ y: -50, duration: 250, delay: 300 }}
@@ -140,6 +152,7 @@
   {:else if currentPage === 2}
     <div id="photo">
       {#each Manga1Compressed as item, n}
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
         <div
           class="items"
           in:fly={{ y: -50, duration: 250, delay: 300 }}
@@ -198,8 +211,8 @@
         </p>
 
         <div id="about-me-buttons">
-          <a href="#">CONTACT</a>
-          <a href="#">CV</a>
+          <a href="https://lambdart.bio.link">CONTACT</a>
+          <a href="/Fazakas_Adam_CV.pdf">CV</a>
         </div>
 
         <br />
@@ -213,8 +226,12 @@
       </div>
     </div>
   {:else if currentPage === 4}
-    <div id="photo">
+    <div
+      id="photo"
+      style={`-moz-column-count: ${columns}; -webkit-column-count: ${columns}; column-count: ${columns};`}
+    >
       {#each AllArtCompressed as item, n}
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
         <div
           class="items"
           in:fly={{ y: -50, duration: 250, delay: 300 }}
@@ -248,7 +265,7 @@
     align-items: center;
     justify-items: center;
     color: white;
-
+    font-family: "Lekton", sans-serif;
     margin: 10px;
   }
   .items > div {
@@ -275,7 +292,7 @@
     -webkit-column-gap: 0px;
     -moz-column-count: 5;
     -moz-column-gap: 0px;
-    column-count: 5;
+    column-count: 8;
     column-gap: 0px;
     width: fit-content;
     padding-top: 10px;
@@ -373,34 +390,5 @@
     background: transparent;
     color: white;
     transition: 0.25s;
-  }
-
-  @media (max-width: 1200px) {
-    #photo {
-      -moz-column-count: 4;
-      -webkit-column-count: 4;
-      column-count: 4;
-    }
-  }
-  @media (max-width: 1000px) {
-    #photo {
-      -moz-column-count: 3;
-      -webkit-column-count: 3;
-      column-count: 3;
-    }
-  }
-  @media (max-width: 800px) {
-    #photo {
-      -moz-column-count: 2;
-      -webkit-column-count: 2;
-      column-count: 2;
-    }
-  }
-  @media (max-width: 400px) {
-    #photo {
-      -moz-column-count: 1;
-      -webkit-column-count: 1;
-      column-count: 1;
-    }
   }
 </style>
