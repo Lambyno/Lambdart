@@ -43,10 +43,16 @@
   let show_dialog = false;
 
   let columns = 10;
+  if (checkMobile()) {
+    columns = 1;
+  }
   onMount(() => {
-    window.addEventListener("resize", () => {
+    if (!checkMobile()) {
       columns = Math.round(window.innerWidth / 200);
-    });
+      window.addEventListener("resize", () => {
+        columns = Math.round(window.innerWidth / 200);
+      });
+    }
   });
 </script>
 
@@ -86,10 +92,7 @@
   </div>
 {/if}
 
-<div
-  id="showcasetype-container"
-  style={checkMobile() ? "margin-top: 50px;" : ""}
->
+<div id="showcasetype-container">
   {#if !checkMobile() && currentPage != 3}
     <div id="parallax" style={`background-image: url(${ParallaxImage})`} />
   {/if}
@@ -181,11 +184,11 @@
     <div
       in:fly={{ y: -50, duration: 250, delay: 300 }}
       out:fly={{ y: -50, duration: 250 }}
-      style="display: grid; justify-items: center; align-items: center; height: 100%; width: 100%; margin-top: 50px; line-height: 1; color: white;"
+      id="about-me-container"
     >
       <div
         style={checkMobile()
-          ? ""
+          ? " display: grid; justify-items: center;"
           : "width: 1000px; font-size: x-large; display: grid; justify-items: center;"}
       >
         <img
@@ -223,6 +226,36 @@
             style="text-decoration: none; color: white;"><u>Elham</u></a
           >!</span
         >
+
+        <div
+          id="about-me-socials"
+          style={checkMobile() ? "" : "display: none;"}
+        >
+          <a href="https://lambino.artstation.com/"
+            ><img
+              src="/Icons_Colors_Font/Icons/artstation_icon.svg"
+              alt="Artstation"
+            /></a
+          >
+          <a href="https://www.behance.net/dmfazakas1"
+            ><img
+              src="/Icons_Colors_Font/Icons/be_behance_design_community_portfolio_behance_logo_icon.svg"
+              alt="Behance"
+            /></a
+          >
+          <a href="https://instagram.com/lambdart_"
+            ><img
+              src="/Icons_Colors_Font/Icons/instagram_icon.svg"
+              alt="Instagram"
+            /></a
+          >
+          <a href="https://twitter.com/my_lambda"
+            ><img
+              src="/Icons_Colors_Font/Icons/twitter_bird_icon.svg"
+              alt="Twitter"
+            /></a
+          >
+        </div>
       </div>
     </div>
   {:else if currentPage === 4}
@@ -369,6 +402,16 @@
     transition: 0.25s;
   }
 
+  #about-me-container {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    margin-top: 50px;
+    line-height: 1;
+    color: white;
+  }
   #about-me-buttons {
     display: flex;
   }
@@ -390,5 +433,55 @@
     background: transparent;
     color: white;
     transition: 0.25s;
+  }
+
+  /* media for mobile */
+  @media only screen and (max-width: 600px) {
+    #photo {
+      -webkit-column-count: 1;
+      -webkit-column-gap: 0px;
+      -moz-column-count: 1;
+      -moz-column-gap: 0px;
+      column-count: 1;
+      column-gap: 0px;
+      width: fit-content;
+      padding-top: 10px;
+      margin: 0 auto 0 auto;
+      width: 100%;
+    }
+
+    #about-me-socials {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    #about-me-socials img {
+      width: 30px;
+      height: 30px;
+      filter: invert();
+    }
+
+    #about-me-container {
+      margin-top: 20px;
+    }
+
+    #about-me-buttons {
+      display: flex;
+      justify-content: center;
+    }
+    #about-me-buttons a {
+      text-decoration: none;
+      background: white;
+      color: black;
+      padding: 20px;
+      box-sizing: border-box;
+      margin: 10px;
+      width: 150px;
+      text-align: center;
+      font-size: x-large;
+      font-family: "Barlow", sans-serif;
+      border: 5px solid white;
+      transition: 0.25s;
+    }
   }
 </style>

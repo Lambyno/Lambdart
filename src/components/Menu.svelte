@@ -3,50 +3,79 @@
   import { checkMobile } from "./checkMobile.svelte";
   import { fade } from "svelte/transition";
 
-  // links
-  import * as YouTube from "/Icons_Colors_Font/Icons/yotube.ico";
-  import * as KoFi from "/Icons_Colors_Font/Icons/ko-fi.svg";
-  import * as BioLink from "/Icons_Colors_Font/Icons/bio link.ico";
-  import * as Mail from "/Icons_Colors_Font/Icons/mail.svg";
-  import * as Menu from "/Icons_Colors_Font/Icons/menu.svg";
-
   let menuOpen = false;
 </script>
 
 <div id="top-level-menu-container">
   {#if menuOpen}
-    <div
-      id="menu-container-mobile"
+    <!-- svelte-ignore a11y-click-events-have-key-events -->
+    <span
+      id="menu-back"
+      on:click={() => {
+        menuOpen = false;
+      }}
       in:fade={{ duration: 80 }}
       out:fade={{ duration: 80 }}
     >
+      {`<`}
+    </span>
+    <div
+      id="menu-display-container-mobile"
+      in:fade={{ duration: 80 }}
+      out:fade={{ duration: 80 }}
+    >
+      <div id="menu-display-title-mobile">
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+        <span
+          id="menu-title"
+          style="margin: 0;"
+          on:click={() => {
+            page.set(4);
+            menuOpen = false;
+          }}>FAZAKAS ÁDÁM</span
+        >
+        <br />
+        <span
+          style="font-family: 'Lekton', sans-serif; font-size: x-large; transform: scale(1, 1.5);"
+        >
+          Concept artist
+        </span>
+      </div>
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <span
         on:click={() => {
           page.set(0);
           menuOpen = false;
-        }}>Character Design</span
+        }}
+        style="align-self: end;">character design</span
       >
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <span
         on:click={() => {
           page.set(1);
           menuOpen = false;
-        }}>Illustrations</span
+        }}>illustrations</span
       >
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <span
         on:click={() => {
           page.set(3);
           menuOpen = false;
-        }}>About Me</span
+        }}
+        style="align-self: start;">about me</span
       >
 
-      <div>
-        <a href="https://twitter.com/my_lambda"
+      <div style="display: flex; gap: 10px;">
+        <a href="https://lambino.artstation.com/"
           ><img
-            src="/Icons_Colors_Font/Icons/twitter_bird_icon.svg"
-            alt="Twitter"
+            src="/Icons_Colors_Font/Icons/artstation_icon.svg"
+            alt="Artstation"
+          /></a
+        >
+        <a href="https://www.behance.net/dmfazakas1"
+          ><img
+            src="/Icons_Colors_Font/Icons/be_behance_design_community_portfolio_behance_logo_icon.svg"
+            alt="Behance"
           /></a
         >
         <a href="https://instagram.com/lambdart_"
@@ -55,40 +84,26 @@
             alt="Instagram"
           /></a
         >
-        <a
-          href="https://www.youtube.com/channel/UCd3vo47GFeIlOjrKQqtmeqQ/featured"
-          ><img src={YouTube.default} alt="YouTube" /></a
-        >
-        <a href="https://ko-fi.com/mylambda52231"
-          ><img src={KoFi.default} alt="KoFi" /></a
-        >
-        <a href="https://lambdart.bio.link/"
+        <a href="https://twitter.com/my_lambda"
           ><img
-            src={BioLink.default}
-            alt="BioLink"
-            style="margin-right: 0;"
+            src="/Icons_Colors_Font/Icons/twitter_bird_icon.svg"
+            alt="Twitter"
           /></a
-        >
-        <a href="mailto:adamfazakas@yahoo.com"
-          ><img src={Mail.default} alt="Mail" /></a
         >
       </div>
     </div>
   {/if}
 
   {#if checkMobile()}
-    <div
-      id="menu-container"
-      style="display: flex; justify-content: center; position:fixed;"
-    >
-      <div style="padding: 10px;">
+    <div id="menu-container-mobile">
+      <div style="padding: 20px;">
         <span id="menu-title" style="margin: 0;">FAZAKAS ÁDÁM</span>
       </div>
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <img
-        src={Menu.default}
+        src="/Icons_Colors_Font/Icons/menu.svg"
         alt="menu"
-        style="50px; height: 50px; margin-left: 10px;"
+        style="width: 50px; height: 50px; margin-left: auto; margin-right: 20px;"
         on:click={() => {
           menuOpen = true;
         }}
@@ -170,33 +185,6 @@
           >
         </div>
       </div>
-      <!--<div id="menu-container-right">
-      <div>
-        <a href="https://twitter.com/my_lambda"
-          ><img src={Twitter.default} alt="Twitter" /></a
-        >
-        <a href="https://instagram.com/lambdart_"
-          ><img src={Instagram.default} alt="Instagram" /></a
-        >
-        <a
-          href="https://www.youtube.com/channel/UCd3vo47GFeIlOjrKQqtmeqQ/featured"
-          ><img src={YouTube.default} alt="YouTube" /></a
-        >
-        <a href="https://ko-fi.com/mylambda52231"
-          ><img src={KoFi.default} alt="KoFi" /></a
-        >
-        <a href="https://lambdart.bio.link/"
-          ><img
-            src={BioLink.default}
-            alt="BioLink"
-            style="margin-right: 0;"
-          /></a
-        >
-        <a href="mailto:adamfazakas@yahoo.com" style="margin-left: 10px;"
-          ><img src={Mail.default} alt="Mail" /></a
-        >
-      </div>
-    </div>-->
     </div>
   {/if}
 </div>
@@ -205,7 +193,7 @@
   #top-level-menu-container {
     background: black;
   }
-  #menu-container-mobile {
+  #menu-display-container-mobile {
     position: fixed;
     z-index: 555;
     background: black;
@@ -214,6 +202,28 @@
     display: grid;
     justify-items: center;
     align-items: center;
+    color: white;
+    font-size: x-large;
+    font-weight: bold;
+    font-family: "Lekton", sans-serif;
+    background: #323c44;
+    transition: 0.25s;
+  }
+  #menu-display-container-mobile > div > a > img {
+    width: 30px;
+    height: 30px;
+  }
+
+  #menu-display-title-mobile {
+    padding: 20px;
+    background: black;
+    width: 100%;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    padding: 30px;
+    box-sizing: border-box;
+    align-self: end;
   }
 
   #menu-container {
@@ -233,6 +243,16 @@
     height: 100%;
   }
 
+  #menu-container-mobile {
+    height: 100px;
+    background: black;
+    color: white;
+    box-sizing: border-box;
+    justify-content: center;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+  }
   #menu-container-left {
     display: flex;
     justify-items: center;
@@ -298,6 +318,18 @@
     transition: 0.25s;
   }
 
+  #menu-back {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    color: white;
+    font-size: xx-large;
+    z-index: 999;
+    font-weight: bold;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+      sans-serif;
+  }
+
   span {
     font-family: "Space Mono", monospace;
     letter-spacing: -1px;
@@ -306,6 +338,7 @@
   img {
     width: 150px;
     height: 200px;
+    filter: invert();
   }
 
   @keyframes fadein {
